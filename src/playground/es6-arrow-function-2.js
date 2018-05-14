@@ -1,8 +1,6 @@
-"use strict";
-
 console.log("es6-arrow-function-2");
 
-var add = function add(a, b) {
+const add = function(a, b) {
   console.log(arguments);
   return a + b;
 };
@@ -29,15 +27,13 @@ console.log(add(5, 1, 1000));
 // };
 
 // ES6 Method binding
-var user = {
+const user = {
   name: "Will",
   cities: ["Guangzhou", "Sydney"],
-  printPlacesLived: function printPlacesLived() {
-    var _this = this;
-
-    var cityMessages = this.cities.map(function (city) {
-      return _this.name + " has lived in " + city;
-    });
+  printPlacesLived() {
+    const cityMessages = this.cities.map(
+      city => `${this.name} has lived in ${city}`
+    );
 
     return cityMessages;
   }
@@ -47,18 +43,14 @@ console.log(user.printPlacesLived());
 
 // Challenge area
 
-var multiplier = {
+const multiplier = {
   // numbers - array of numbers
   // multiplyBy - single number
   // multiply - return a new array where the number have been multiplied
   numbers: [1, 2, 3],
   multiplyBy: 2,
-  multiply: function multiply() {
-    var _this2 = this;
-
-    return this.numbers.map(function (number) {
-      return number * _this2.multiplyBy;
-    });
+  multiply() {
+    return this.numbers.map(number => number * this.multiplyBy);
   }
 };
 console.log(multiplier.multiply());
