@@ -1,64 +1,117 @@
 "use strict";
 
-console.log("es6-arrow-function-2");
+console.log("App.js is running");
 
-var add = function add(a, b) {
-  console.log(arguments);
-  return a + b;
+var app = {
+  title: "Indecision App",
+  subtitle: "Put your life in the hands of a computer",
+  options: ["One", "Two"]
 };
-console.log(add(5, 1, 1000));
 
-// const add_af = (a, b) => {
-//   // Arguements are not defined in arrow function
-//   console.log(arguments);
-//   return a + b;
-// };
-// console.log(add_af(5, 1, 1000));
+var template = React.createElement(
+  "div",
+  null,
+  React.createElement(
+    "h1",
+    null,
+    app.title
+  ),
+  app.subtitle && React.createElement(
+    "p",
+    null,
+    app.subtitle
+  ),
+  app.options.length > 0 ? React.createElement(
+    "p",
+    null,
+    "Here are your options"
+  ) : React.createElement(
+    "p",
+    null,
+    "No options"
+  )
+);
 
-// ES5 Method binding
-// const user = {
-//   name: "Will",
-//   cities: ["Guangzhou", "Sydney"],
-//   printPlacesLived: function() {
-//     console.log(this.name);
-//     console.log(this.cities);
-//     this.cities.forEach(city => {
-//       console.log(this.name + " " + "has lived in " + city);
-//     });
-//   }
-// };
-
-// ES6 Method binding
 var user = {
-  name: "Will",
-  cities: ["Guangzhou", "Sydney"],
-  printPlacesLived: function printPlacesLived() {
-    var _this = this;
-
-    var cityMessages = this.cities.map(function (city) {
-      return _this.name + " has lived in " + city;
-    });
-
-    return cityMessages;
-  }
+  name: "William Kuang",
+  age: 27,
+  location: "Sydney"
 };
 
-console.log(user.printPlacesLived());
-
-// Challenge area
-
-var multiplier = {
-  // numbers - array of numbers
-  // multiplyBy - single number
-  // multiply - return a new array where the number have been multiplied
-  numbers: [1, 2, 3],
-  multiplyBy: 2,
-  multiply: function multiply() {
-    var _this2 = this;
-
-    return this.numbers.map(function (number) {
-      return number * _this2.multiplyBy;
-    });
+function getLocation(location) {
+  if (location) {
+    return React.createElement(
+      "p",
+      null,
+      "Location: ",
+      location
+    );
   }
+}
+
+var template2 = React.createElement(
+  "div",
+  null,
+  React.createElement(
+    "h1",
+    null,
+    user.name ? user.name : "Anon"
+  ),
+  user.age && user.age >= 18 && React.createElement(
+    "p",
+    null,
+    "Age: ",
+    user.age
+  ),
+  getLocation(user.location)
+);
+
+var count = 0;
+var addOne = function addOne() {
+  console.log("addOne");
 };
-console.log(multiplier.multiply());
+var template3 = React.createElement(
+  "div",
+  null,
+  React.createElement(
+    "h1",
+    null,
+    "Count: ",
+    count
+  ),
+  React.createElement(
+    "button",
+    { onClick: addOne, id: "my-id", className: "button" },
+    "+1"
+  ),
+  React.createElement(
+    "button",
+    {
+      onClick: function onClick() {
+        console.log("minusOne");
+      },
+      id: "my-id2",
+      className: "button"
+    },
+    "-1"
+  ),
+  React.createElement(
+    "button",
+    {
+      onClick: function onClick() {
+        console.log("reset");
+      },
+      id: "my-id3",
+      className: "button"
+    },
+    "reset"
+  )
+);
+console.log(template3);
+var appRoot = document.getElementById("app");
+
+// Challenge
+// Make button "-1" - setup minusOne function and register - log "minusOne"
+// Make reset button "reset" - setup reset function log "reset"
+
+ReactDOM.render(template3, appRoot);
