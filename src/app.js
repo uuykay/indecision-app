@@ -36,39 +36,41 @@ const template2 = (
 
 let count = 0;
 const addOne = () => {
-  console.log("addOne");
+  count++;
+  renderCounterApp();
+  console.log("addOne", count);
 };
-const template3 = (
-  <div>
-    <h1>Count: {count}</h1>
-    <button onClick={addOne} id="my-id" className="button">
-      +1
-    </button>
-    <button
-      onClick={() => {
-        console.log("minusOne");
-      }}
-      id="my-id2"
-      className="button"
-    >
-      -1
-    </button>
-    <button
-      onClick={() => {
-        console.log("reset");
-      }}
-      id="my-id3"
-      className="button"
-    >
-      reset
-    </button>
-  </div>
-);
-console.log(template3);
+
+const minusOne = () => {
+  count--;
+  renderCounterApp();
+  console.log("minusOne");
+};
+
+const reset = () => {
+  count = 0;
+  renderCounterApp();
+  console.log("reset");
+};
+
 const appRoot = document.getElementById("app");
+const renderCounterApp = () => {
+  const template3 = (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={addOne} className="button">
+        +1
+      </button>
+      <button onClick={minusOne} className="button">
+        -1
+      </button>
+      <button onClick={reset} className="button">
+        reset
+      </button>
+    </div>
+  );
 
-// Challenge
-// Make button "-1" - setup minusOne function and register - log "minusOne"
-// Make reset button "reset" - setup reset function log "reset"
+  ReactDOM.render(template3, appRoot);
+};
 
-ReactDOM.render(template3, appRoot);
+renderCounterApp();

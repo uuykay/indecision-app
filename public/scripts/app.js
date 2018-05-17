@@ -68,50 +68,52 @@ var template2 = React.createElement(
 
 var count = 0;
 var addOne = function addOne() {
-  console.log("addOne");
+  count++;
+  renderCounterApp();
+  console.log("addOne", count);
 };
-var template3 = React.createElement(
-  "div",
-  null,
-  React.createElement(
-    "h1",
-    null,
-    "Count: ",
-    count
-  ),
-  React.createElement(
-    "button",
-    { onClick: addOne, id: "my-id", className: "button" },
-    "+1"
-  ),
-  React.createElement(
-    "button",
-    {
-      onClick: function onClick() {
-        console.log("minusOne");
-      },
-      id: "my-id2",
-      className: "button"
-    },
-    "-1"
-  ),
-  React.createElement(
-    "button",
-    {
-      onClick: function onClick() {
-        console.log("reset");
-      },
-      id: "my-id3",
-      className: "button"
-    },
-    "reset"
-  )
-);
-console.log(template3);
+
+var minusOne = function minusOne() {
+  count--;
+  renderCounterApp();
+  console.log("minusOne");
+};
+
+var reset = function reset() {
+  count = 0;
+  renderCounterApp();
+  console.log("reset");
+};
+
 var appRoot = document.getElementById("app");
+var renderCounterApp = function renderCounterApp() {
+  var template3 = React.createElement(
+    "div",
+    null,
+    React.createElement(
+      "h1",
+      null,
+      "Count: ",
+      count
+    ),
+    React.createElement(
+      "button",
+      { onClick: addOne, className: "button" },
+      "+1"
+    ),
+    React.createElement(
+      "button",
+      { onClick: minusOne, className: "button" },
+      "-1"
+    ),
+    React.createElement(
+      "button",
+      { onClick: reset, className: "button" },
+      "reset"
+    )
+  );
 
-// Challenge
-// Make button "-1" - setup minusOne function and register - log "minusOne"
-// Make reset button "reset" - setup reset function log "reset"
+  ReactDOM.render(template3, appRoot);
+};
 
-ReactDOM.render(template3, appRoot);
+renderCounterApp();
