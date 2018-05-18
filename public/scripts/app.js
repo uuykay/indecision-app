@@ -8,44 +8,80 @@ var app = {
   options: ["One", "Two"]
 };
 
-var template = React.createElement(
-  "div",
-  null,
-  React.createElement(
-    "h1",
-    null,
-    app.title
-  ),
-  app.subtitle && React.createElement(
-    "p",
-    null,
-    app.subtitle
-  ),
-  React.createElement(
-    "p",
-    null,
-    app.options.length > 0 ? "Here are your options" : "No options"
-  ),
-  React.createElement(
-    "ol",
+var onFormSubmit = function onFormSubmit(e) {
+  e.preventDefault();
+  var option = e.target.elements.option.value;
+
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = "";
+    rerender();
+  }
+};
+
+// create Remove All button above list
+// on click -> wipe the array -> rerender
+var resetAll = function resetAll() {
+  app.options = [];
+  rerender();
+};
+
+var appRoot = document.getElementById("app");
+var rerender = function rerender() {
+  var template = React.createElement(
+    "div",
     null,
     React.createElement(
-      "li",
+      "h1",
       null,
-      "Item 1"
+      app.title
+    ),
+    app.subtitle && React.createElement(
+      "p",
+      null,
+      app.subtitle
     ),
     React.createElement(
-      "li",
+      "p",
       null,
-      "Item 2"
+      app.options.length > 0 ? "Here are your options" : "No options"
+    ),
+    React.createElement(
+      "p",
+      null,
+      app.options.length
+    ),
+    React.createElement(
+      "button",
+      { onClick: resetAll },
+      "Reset All"
+    ),
+    React.createElement(
+      "ol",
+      null,
+      React.createElement(
+        "li",
+        null,
+        "Item 1"
+      ),
+      React.createElement(
+        "li",
+        null,
+        "Item 2"
+      )
+    ),
+    React.createElement(
+      "form",
+      { onSubmit: onFormSubmit },
+      React.createElement("input", { type: "text", name: "option" }),
+      React.createElement(
+        "button",
+        null,
+        "Add Option"
+      )
     )
-  ),
-  React.createElement(
-    "form",
-    null,
-    React.createElement("input", null),
-    ">"
-  )
-);
-var appRoot = document.getElementById("app");
-ReactDOM.render(template, appRoot);
+  );
+
+  ReactDOM.render(template, appRoot);
+};
+rerender();
