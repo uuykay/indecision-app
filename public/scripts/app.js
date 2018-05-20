@@ -26,6 +26,8 @@ var resetAll = function resetAll() {
   rerender();
 };
 
+var numbers = [55, 101, 1000];
+
 var appRoot = document.getElementById("app");
 var rerender = function rerender() {
   var template = React.createElement(
@@ -56,19 +58,36 @@ var rerender = function rerender() {
       { onClick: resetAll },
       "Reset All"
     ),
+    numbers.map(function (number, i) {
+      return React.createElement(
+        "p",
+        { key: i },
+        number * 2
+      );
+    }),
+    [React.createElement(
+      "p",
+      { key: "1" },
+      "Hello"
+    ), React.createElement(
+      "p",
+      { key: "2" },
+      "How's it going?"
+    ), React.createElement(
+      "p",
+      { key: "3" },
+      "Good thanks"
+    )],
     React.createElement(
       "ol",
       null,
-      React.createElement(
-        "li",
-        null,
-        "Item 1"
-      ),
-      React.createElement(
-        "li",
-        null,
-        "Item 2"
-      )
+      app.options.map(function (option, i) {
+        return React.createElement(
+          "p",
+          { key: i },
+          option
+        );
+      })
     ),
     React.createElement(
       "form",

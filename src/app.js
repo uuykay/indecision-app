@@ -24,6 +24,8 @@ const resetAll = () => {
   rerender();
 };
 
+const numbers = [55, 101, 1000];
+
 const appRoot = document.getElementById("app");
 const rerender = () => {
   const template = (
@@ -33,10 +35,11 @@ const rerender = () => {
       <p>{app.options.length > 0 ? "Here are your options" : "No options"}</p>
       <p>{app.options.length}</p>
       <button onClick={resetAll}>Reset All</button>
-      <ol>
-        <li>Item 1</li>
-        <li>Item 2</li>
-      </ol>
+
+      {numbers.map((number, i) => <p key={i}>{number * 2}</p>)}
+
+      {[<p key="1">Hello</p>, <p key="2">How's it going?</p>, <p key="3">Good thanks</p>]}
+      <ol>{app.options.map((option, i) => <p key={i}>{option}</p>)}</ol>
       <form onSubmit={onFormSubmit}>
         <input type="text" name="option" />
         <button>Add Option</button>
