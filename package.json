@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-		"start": "live-server public",
-		"babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react -watch",
-		"babel-play": "babel src/playground/es6-arrow-function-2.js --out-file=public/scripts/app.js --presets=env,react -watch",
-		"babel-build-it": "babel src/playground/build-it.js --out-file=public/scripts/app.js --presets=env,react -watch"
+    "serve": "live-server public",
+    "babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react -watch",
+    "babel-play": "babel src/playground/es6-arrow-function-2.js --out-file=public/scripts/app.js --presets=env,react -watch",
+    "babel-build-it": "babel src/playground/build-it.js --out-file=public/scripts/app.js --presets=env,react -watch",
+    "start": "concurrently --kill-others \"npm run serve\" \"npm run babel\""
   },
   "repository": {
     "type": "git",
@@ -23,9 +24,10 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "concurrently": "^3.5.1",
     "live-server": "^1.2.0"
-	},
-	"prettier":{
-		"printWidth": "100"
-	}
+  },
+  "prettier": {
+    "printWidth": "100"
+  }
 }
