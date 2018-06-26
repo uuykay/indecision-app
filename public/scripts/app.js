@@ -21,7 +21,7 @@ var Counter = function (_React$Component) {
     _this.handleMinusOne = _this.handleMinusOne.bind(_this);
     _this.handleReset = _this.handleReset.bind(_this);
     _this.state = {
-      count: props.count
+      count: parseFloat(props.count)
     };
     return _this;
   }
