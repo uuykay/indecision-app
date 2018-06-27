@@ -22,10 +22,18 @@ class IndecisionApp extends React.Component {
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
     this.handlePick = this.handlePick.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
+    this.handleDeleteOption = this.handleDeleteOption.bind(this);
   }
 
   handleDeleteOptions() {
     this.setState(() => ({ options: [] }));
+  }
+
+  handleDeleteOption(optionToRemove) {
+    console.log("hdo", optionToRemove);
+    this.setState(prevState => ({
+      options: prevState.options.filter(option => option !== optionToRemove)
+    }));
   }
 
   handlePick() {
@@ -49,7 +57,11 @@ class IndecisionApp extends React.Component {
       <div>
         <Header title={this.state.title} subtitle={this.state.subtitle} />
         <Action hasOptions={this.state.options.length > 0} handlePick={this.handlePick} />
-        <Options options={this.state.options} handleDeleteOptions={this.handleDeleteOptions} />
+        <Options
+          options={this.state.options}
+          handleDeleteOptions={this.handleDeleteOptions}
+          handleDeleteOption={this.handleDeleteOption}
+        />
         <AddOption handleAddOption={this.handleAddOption} />
       </div>
     );
@@ -84,16 +96,31 @@ const Action = props => {
 };
 
 const Options = props => {
-  const { options, handleDeleteOptions } = props;
+  const { options, handleDeleteOptions, handleDeleteOption } = props;
   return (
     <div>
       <button onClick={handleDeleteOptions}>Remove All</button>
-      <ul>{options.map((option, i) => <Option option={option} key={i} />)}</ul>
+      <ul>
+        {options.map(option => (
+          <Option key={option} optionText={option} handleDeleteOption={handleDeleteOption} />
+        ))}
+      </ul>
     </div>
   );
 };
 const Option = props => {
-  return <li>{props.option}</li>;
+  return (
+    <div>
+      {props.optionText}
+      <button
+        onClick={e => {
+          props.handleDeleteOption(props.optionText);
+        }}
+      >
+        remove
+      </button>
+    </div>
+  );
 };
 
 // AddOption -> AddOption component here
