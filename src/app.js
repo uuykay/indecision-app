@@ -25,6 +25,19 @@ class IndecisionApp extends React.Component {
     this.handleDeleteOption = this.handleDeleteOption.bind(this);
   }
 
+  componentDidMount() {
+    console.log("componentDidMount");
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // State / props change (after)
+    console.log("componentDidUpdate");
+  }
+
+  componentWillUnmount() {
+    console.log("componentWillUnmount IndecisionApp");
+  }
+
   handleDeleteOptions() {
     this.setState(() => ({ options: [] }));
   }
