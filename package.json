@@ -8,7 +8,8 @@
     "babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react -watch",
     "babel-play": "babel src/playground/counter-example2.js --out-file=public/scripts/app.js --presets=env,react -watch",
     "babel-build-it": "babel src/playground/build-it.js --out-file=public/scripts/app.js --presets=env,react -watch",
-    "start": "concurrently --kill-others \"npm run serve\" \"npm run babel\""
+    "start": "concurrently --kill-others \"npm run serve\" \"npm run babel\"",
+    "build": "webpack --config ./webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,9 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "concurrently": "^3.5.1",
-    "live-server": "^1.2.0"
+    "live-server": "^1.2.0",
+    "webpack": "^4.12.2",
+    "webpack-cli": "^3.0.8"
   },
   "prettier": {
     "printWidth": "100"
